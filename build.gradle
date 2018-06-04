@@ -2,7 +2,7 @@ apply plugin: 'war'
 
 apply plugin: 'org.hidetake.ssh'
 
-project.ext.set("glueVersion", "0.1.151")
+project.ext.set("glueVersion", "1.0.1")
 
 remotes {
   gluehome_aws {
@@ -61,10 +61,10 @@ task copyGluetoolsWsWar(type: Copy) {
 
 task deployAll(dependsOn: ['deployGluetoolsWebWarGlueHomeAWS',
 	'deployGluetoolsWsWarGlueHomeAWS',
-	'deployHevGlueWarGlueHomeAWS',
-	'deployHevGlueGluetoolsWsContextXmlGlueHomeAWS',
-	'deployHevGlueConfigGlueHomeAWS',
-	'deployHevGlueDbToGlueHomeAWS'])
+	'deployRabvGlueWarGlueHomeAWS',
+	'deployRabvGlueGluetoolsWsContextXmlGlueHomeAWS',
+	'deployRabvGlueConfigGlueHomeAWS',
+	'deployRabvGlueDbToGlueHomeAWS'])
 
 task deployGluetoolsWebWarGlueHomeAWS(type: DeployWarTask, dependsOn: 'copyGluetoolsWebWar') {
     warFile = new File(buildDir, 'runtimeWars/gluetools-web.war')
@@ -88,7 +88,7 @@ task deployGluetoolsWsWarGlueHomeAWS(type: DeployWarTask, dependsOn: 'copyGlueto
     taskSsh = ssh
 }
 
-task deployHevGlueWarGlueHomeAWS(type: DeployWarTask, dependsOn: war) {
+task deployRabvGlueWarGlueHomeAWS(type: DeployWarTask, dependsOn: war) {
     warFile = new File(buildDir, '/libs/rabvGlue.war')
     remote = remotes.gluehome_aws
     taskBuildDir = buildDir
@@ -146,7 +146,7 @@ class DeployWarTask extends DefaultTask {
 
 
 // config for RABV-GLUE gluetools-ws webapp 
-task deployHevGlueGluetoolsWsContextXmlGlueHomeAWS() {
+task deployRabvGlueGluetoolsWsContextXmlGlueHomeAWS() {
   ext.file = new File(projectDir, '/gluehome_aws/gluetools-ws-context.xml')
   ext.touchfile = new File(buildDir, '/deployGlueWSConfigGlueHomeAWS.touchfile')
   inputs.file file
@@ -169,9 +169,9 @@ task deployHevGlueGluetoolsWsContextXmlGlueHomeAWS() {
 }
 
 // config for RABV-GLUE glue engine which tells it where to find its database. 
-task deployHevGlueConfigGlueHomeAWS {
+task deployRabvGlueConfigGlueHomeAWS {
   ext.file = new File(projectDir, '/gluehome_aws/rabv-glue-gluetools-config.xml')
-  ext.touchfile = new File(buildDir, '/deployHevGlueConfigGlueHomeAWS.touchfile')
+  ext.touchfile = new File(buildDir, '/deployRabvGlueConfigGlueHomeAWS.touchfile')
   inputs.file file
   outputs.file touchfile
   doLast {
@@ -189,7 +189,7 @@ task deployHevGlueConfigGlueHomeAWS {
   }
 }
 
-task initHevGlueDBGlueHomeAWS {
+task initRabvGlueDBGlueHomeAWS {
   doLast {
 	  ssh.run {
 	    session(remotes.gluehome_aws) {
@@ -202,16 +202,16 @@ task initHevGlueDBGlueHomeAWS {
   }
 }
 
-task dumpHevGlueDB(type: Exec) {
+task dumpRabvGlueDB(type: Exec) {
 	standardOutput = new FileOutputStream(new File('/tmp/rabv_glue.sql'))
 	commandLine '/usr/local/mysql/bin/mysqldump', '-u', 'rabvglue', '--password=rabvglue', 'RABV_GLUE'
 }
 
-task zipHevGlueDB(type: Exec, dependsOn: 'dumpHevGlueDB') {
+task zipRabvGlueDB(type: Exec, dependsOn: 'dumpRabvGlueDB') {
 	commandLine '/usr/bin/gzip', '-f', '/tmp/rabv_glue.sql'
 }
 
-task deployHevGlueDbToGlueHomeAWS(dependsOn: 'zipHevGlueDB') {
+task deployRabvGlueDbToGlueHomeAWS(dependsOn: 'zipRabvGlueDB') {
   doLast {
 	  println "Uploading RABV-GLUE DB"
 	  ssh.run {

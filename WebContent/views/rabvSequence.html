@@ -51,13 +51,19 @@
 					<td><b>Isolate ID</b></td><td>{{handleNull(renderResult.sequence.isolate)}}</td>
 				</tr>
 				<tr>
-					<td><b>Country of Origin</b></td><td>{{renderResult.sequence.country ? (renderResult.sequence.country):"-"}}</td>
-				</tr>
-				<tr>
-					<td><b>Collection Year</b></td><td>{{handleNull(renderResult.sequence.collectionYear)}}</td>
-				</tr>
-				<tr>
 					<td><b>Host Species</b></td><td><em>{{handleNull(renderResult.sequence.host)}}</em></td>
+				</tr>
+				<tr>
+					<td><b>Collection Year Range</b></td><td>{{handleNull(renderResult.sequence.collectionYearRange)}}</td>
+				</tr>
+				<tr>
+					<td><b>Country of Origin</b></td><td>{{renderResult.sequence.country ? (renderResult.sequence.country+" ("+renderResult.sequence.country_iso+")"):"-"}}</td>
+				</tr>
+				<tr ng-if="renderResult.sequence.country">
+					<td><b>Country Development Status</b></td><td>{{renderDevelopmentStatus(renderResult.sequence)}}</td>
+				</tr>
+				<tr ng-if="renderResult.sequence.country">
+					<td><b>Global Region</b></td><td>{{renderGlobalRegion(renderResult.sequence)}}</td>
 				</tr>
 			</table>	
 	    </div>

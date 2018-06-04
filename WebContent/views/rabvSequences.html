@@ -25,16 +25,19 @@
 					<th>Isolate ID</th>
 					<th>Country of Origin</th>
 					<th>Host Species</th>
-					<th>Collection Year</th>
+					<th>Collection Year Range</th>
+					<th>Reference</th>
 				</thead>
 				<colgroup>
-			       <col span="1" style="width: 15%;">
-			       <col span="1" style="width: 15%;">
-			       <col span="1" style="width: 15%;">
 			       <col span="1" style="width: 10%;">
-			       <col span="1" style="width: 15%;">
-			       <col span="1" style="width: 15%;">
-			       <col span="1" style="width: 15%;">
+			       <col span="1" style="width: 8%;">
+			       <col span="1" style="width: 8%;">
+			       <col span="1" style="width: 6%;">
+			       <col span="1" style="width: 10%;">
+			       <col span="1" style="width: 10%;">
+			       <col span="1" style="width: 12%;">
+			       <col span="1" style="width: 10%;">
+			       <col span="1" style="width: 14%;">
 				</colgroup>
 				<tbody>
 					<tr ng-repeat="sequenceResult in listSequenceResult track by $index">
@@ -43,9 +46,13 @@
 						<td>{{sequenceResult.gb_update_date}}</td>
 						<td>{{sequenceResult.gb_length}}</td>
 						<td>{{handleNull(sequenceResult.isolate)}}</td>
-						<td>{{sequenceResult.gb_country ? (sequenceResult.gb_country):"-"}}</td>
+						<td>{{sequenceResult["m49_country.display_name"] ? (sequenceResult["m49_country.display_name"]+" ("+sequenceResult["m49_country.id"]+")"):"-"}}</td>
 						<td><em>{{handleNull(sequenceResult.host)}}</em></td>
 						<td>{{collectionYearRange(sequenceResult.collection_year, sequenceResult.collection_year)}}</td>
+						<td ng-show="sequenceResult.gb_pubmed_id == null">-</td>
+						<td ng-show="sequenceResult.gb_pubmed_id != null">
+							<a href="https://www.ncbi.nlm.nih.gov/pubmed/{{sequenceResult.gb_pubmed_id}}" target="_blank">PubMed {{sequenceResult.gb_pubmed_id}} <span class="glyphicon glyphicon-link"></span></a>
+						</td>
 						
 					</tr>
 				</tbody>

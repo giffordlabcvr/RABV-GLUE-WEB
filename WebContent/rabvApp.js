@@ -106,9 +106,9 @@ rabvApp.controller('rabvAppCtrl',
 function ($scope, glueWS, glueWebToolConfig) {
 	$scope.brand = "RABV-GLUE";
 	$scope.homeMenuTitle = "Home";
-	$scope.projectBrowserMenuTitle = "Sequence Database";
-	$scope.projectBrowserAlignmentMenuTitle = "Clade Tree";
-	$scope.projectBrowserSequenceMenuTitle = "Sequences";
+	$scope.projectBrowserMenuTitle = "Sequence Data";
+	$scope.projectBrowserAlignmentMenuTitle = "NCBI Sequences by Clade";
+	$scope.projectBrowserSequenceMenuTitle = "All NCBI Sequences";
 	$scope.analysisMenuTitle = "Analysis";
 	$scope.analysisToolMenuTitle = "Genotyping and Interpretation";
 	$scope.aboutMenuTitle = "About";
