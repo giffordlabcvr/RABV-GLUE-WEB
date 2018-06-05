@@ -7,7 +7,7 @@
 	  var trackingID;
 	  if(document.location.hostname.indexOf("rabv.glue.cvr.ac.uk") >= 0) {
 		  // RABV-GLUE production analytics account
-		  trackingID = 'UA-93776838-1';
+		  trackingID = 'UA-120403534-1';
 		  ga('create', trackingID, 'auto');
 	  } else {
 		  // sandbox analytics account
