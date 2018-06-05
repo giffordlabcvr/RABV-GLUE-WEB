@@ -42,7 +42,10 @@
 					</tr>
 				</tbody>
 			</table>
-			
+			<div ng-show="renderResult.sequence.pubmedId">
+				<h4>Reference</h4>
+				<a href="https://www.ncbi.nlm.nih.gov/pubmed/{{renderResult.sequence.pubmedId}}" target="_blank">PubMed {{renderResult.sequence.pubmedId}} <span class="glyphicon glyphicon-link"></span></a>
+			</div>
 		</tr>
 	</table>	
 			

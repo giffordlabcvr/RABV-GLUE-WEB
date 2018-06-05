@@ -83,6 +83,16 @@ rabvApp.config(['$routeProvider', 'projectBrowserStandardRoutesProvider',
     });
 
     $routeProvider.
+    when('/aboutGlueProject', {
+  	  templateUrl: './views/aboutGlueProject.html',
+  	  controller: 'aboutGlueProjectCtrl'
+    }).
+    when('/versionInfo', {
+  	  templateUrl: './views/versionInfo.html',
+  	  controller: 'versionInfoCtrl'
+    });
+    
+    $routeProvider.
     when('/howToCite', {
   	  templateUrl: './modules/home/howToCite.html',
   	  controller: 'howToCiteCtrl'
@@ -111,9 +121,12 @@ function ($scope, glueWS, glueWebToolConfig) {
 	$scope.projectBrowserSequenceMenuTitle = "All NCBI Sequences";
 	$scope.analysisMenuTitle = "Analysis";
 	$scope.analysisToolMenuTitle = "Genotyping and Interpretation";
+	$scope.glueProjectMenuTitle = "Offline version";
+	$scope.aboutRabvGlueMenuTitle = "About";
 	$scope.aboutMenuTitle = "About";
-	$scope.howToCiteMenuTitle = "How to cite";
-	$scope.teamMenuTitle = "Team";
+	$scope.teamTitle = "The RABV-GLUE team";
+	$scope.versionInfoTitle = "Version information";
+	$scope.howToCiteTitle = "How to cite";
 	glueWS.setProjectURL("../../../gluetools-ws/project/rabv");
 	glueWebToolConfig.setAnalysisToolURL("../gluetools-web/www/analysisTool");
 	glueWebToolConfig.setAnalysisToolExampleSequenceURL("exampleSequences/fullGenome1.fasta");
