@@ -63,8 +63,7 @@ task deployAll(dependsOn: ['deployGluetoolsWebWarGlueHomeAWS',
 	'deployGluetoolsWsWarGlueHomeAWS',
 	'deployRabvGlueWarGlueHomeAWS',
 	'deployRabvGlueGluetoolsWsContextXmlGlueHomeAWS',
-	'deployRabvGlueConfigGlueHomeAWS',
-	'deployRabvGlueDbToGlueHomeAWS'])
+	'deployRabvGlueConfigGlueHomeAWS'])
 
 task deployGluetoolsWebWarGlueHomeAWS(type: DeployWarTask, dependsOn: 'copyGluetoolsWebWar') {
     warFile = new File(buildDir, 'runtimeWars/gluetools-web.war')
@@ -188,48 +187,5 @@ task deployRabvGlueConfigGlueHomeAWS {
 	  touchfile.createNewFile()
   }
 }
-
-task initRabvGlueDBGlueHomeAWS {
-  doLast {
-	  ssh.run {
-	    session(remotes.gluehome_aws) {
-			// create user gluetools with correct grants
-			execute "echo 'GRANT ALL ON RABV_GLUE.* TO \"rabvglue\"@\"localhost\" identified by \"rabvglue\";' | mysql -u root --password=root123"
-			// create RABV_GLUE database
-			execute "echo 'create database RABV_GLUE character set UTF8;' | mysql -u rabvglue --password=rabvglue" 
-	    }
-	  }
-  }
-}
-
-task dumpRabvGlueDB(type: Exec) {
-	standardOutput = new FileOutputStream(new File('/tmp/rabv_glue.sql'))
-	commandLine '/usr/local/mysql/bin/mysqldump', '-u', 'rabvglue', '--password=rabvglue', 'RABV_GLUE'
-}
-
-task zipRabvGlueDB(type: Exec, dependsOn: 'dumpRabvGlueDB') {
-	commandLine '/usr/bin/gzip', '-f', '/tmp/rabv_glue.sql'
-}
-
-task deployRabvGlueDbToGlueHomeAWS(dependsOn: 'zipRabvGlueDB') {
-  doLast {
-	  println "Uploading RABV-GLUE DB"
-	  ssh.run {
-	    session(remotes.gluehome_aws) {
-	 	  put from: '/tmp/rabv_glue.sql.gz', into: '/tmp/rabv_glue.sql.gz'
-	      execute 'echo "drop database RABV_GLUE; create database RABV_GLUE character set UTF8;" | mysql -u rabvglue --password=rabvglue RABV_GLUE'
-	      execute 'gunzip -c /tmp/rabv_glue.sql.gz | mysql -u rabvglue --password=rabvglue RABV_GLUE'
-	      execute 'rm /tmp/rabv_glue.sql.gz'
-	    }
-	  }
-  }
-}
-
-
-
-
-
-
-
 
 
