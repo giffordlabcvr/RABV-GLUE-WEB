@@ -75,7 +75,7 @@
 						<td>{{handleNull(member['sequence.isolate'])}}</td>
 						<td>{{member['sequence.m49_country.display_name'] ? (member['sequence.m49_country.display_name']+" ("+member['sequence.m49_country.id']+")"):"-"}}</td>
 						<td><em>{{handleNull(member['sequence.host'])}}</em></td>
-						<td>{{collectionYearRange(member['sequence.collection_year'], member['sequence.collection_year'])}}</td>
+						<td>{{collectionYearRange(member['sequence.earliest_collection_year'], member['sequence.latest_collection_year'])}}</td>
 						<td ng-show="member['sequence.gb_pubmed_id'] == null">-</td>
 						<td ng-show="member['sequence.gb_pubmed_id'] != null">
 							<a href="https://www.ncbi.nlm.nih.gov/pubmed/{{member['sequence.gb_pubmed_id']}}" target="_blank">PubMed {{member['sequence.gb_pubmed_id']}} <span class="glyphicon glyphicon-link"></span></a>
