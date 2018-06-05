@@ -57,6 +57,7 @@ projectBrowser.controller('rabvSequencesCtrl',
   	            $scope.globalRegionFilterM49(),
   	            $scope.developmentStatusFilterM49(),
   	            { property:"host", displayName: "Host Species", filterHints: {type: "String"} },
+  	            { property:"patent_related", displayName: "Patent-related?", filterHints: {type: "Boolean"} },
 	            { property:"gb_pubmed_id", displayName: "PubMed ID", filterHints: {type: "String"}  },
   	            { property:"isolate", displayName: "Isolate ID", filterHints: {type: "String"} },
   			]);
