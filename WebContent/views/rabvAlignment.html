@@ -22,7 +22,12 @@
 			</div>
 		</p>
 	</div>
+	
 	<h3>Clade member sequences</h3>
+	<p>
+	This dataset contains sequences from NCBI nucleotide which group within {{renderResult.alignment.renderedName}}. <br/>
+	Patent-related sequences and those of of length &lt; 200bp are excluded.
+	</p>
 	<div us-spinner="{radius:23, width:7, length: 11}" spinner-on="loadingSpinner" style="min-height: 100px; position: relative">
 		<paging-buttons ng-show="!loadingSpinner" paging-context="pagingContext">
 			<div class="btn-group" dropdown is-open="status.isopen_downloadtype1">
