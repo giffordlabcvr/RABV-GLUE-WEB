@@ -17,15 +17,17 @@
 
 var rabvApp = angular.module('rabvApp', [
     'ngRoute',
-    'analysisTool', 
     'projectBrowser', 
+    'angularFileUpload', 
     'home',
     'glueWS',
     'glueWebToolConfig',
     'treeControl',
     'angulartics',
     'angulartics.google.analytics',
-    'angular-cookie-law'
+    'angular-cookie-law',
+    'hljs',
+    'rzModule'
   ]);
 
 console.log("after rabvApp module definition");
@@ -66,13 +68,12 @@ rabvApp.config(['$routeProvider', 'projectBrowserStandardRoutesProvider',
 	  controller: 'rabvSequenceCtrl'
     });
 
-	
     $routeProvider.
-    when('/analysisTool', {
-      templateUrl: '../gluetools-web/www/analysisTool/analysisTool.html',
-      controller: 'analysisToolCtrl'
+    when('/rabvFastaAnalysis', {
+      templateUrl: '../views/rabvFastaAnalysis.html',
+      controller: 'rabvFastaAnalysisCtrl'
     });
-	
+
     $routeProvider.
     when('/home', {
   	  templateUrl: './modules/home/home.html',
@@ -116,11 +117,11 @@ rabvApp.controller('rabvAppCtrl',
 function ($scope, glueWS, glueWebToolConfig) {
 	$scope.brand = "RABV-GLUE";
 	$scope.homeMenuTitle = "Home";
+	$scope.analysisMenuTitle = "Analysis";
+	$scope.analysisToolMenuTitle = "Genotyping and Interpretation";
 	$scope.projectBrowserMenuTitle = "Sequence Data";
 	$scope.projectBrowserAlignmentMenuTitle = "NCBI Sequences by Clade";
 	$scope.projectBrowserSequenceMenuTitle = "All NCBI Sequences";
-	$scope.analysisMenuTitle = "Analysis";
-	$scope.analysisToolMenuTitle = "Genotyping and Interpretation";
 	$scope.glueProjectMenuTitle = "Offline version";
 	$scope.aboutRabvGlueMenuTitle = "About";
 	$scope.aboutMenuTitle = "About";
@@ -131,7 +132,6 @@ function ($scope, glueWS, glueWebToolConfig) {
 	glueWebToolConfig.setAnalysisToolURL("../gluetools-web/www/analysisTool");
 	glueWebToolConfig.setAnalysisToolExampleSequenceURL("exampleSequences/fullGenome1.fasta");
 	glueWebToolConfig.setAnalysisToolExampleMsWindowsSequenceURL("exampleSequencesMsWindows/fullGenome1.fasta");
-	glueWebToolConfig.setAnalysisModuleName("rabvWebAnalysisTool");
 	glueWebToolConfig.setProjectBrowserURL("../gluetools-web/www/projectBrowser");
 	glueWebToolConfig.setGlueWSURL("../gluetools-web/www/glueWS");
 } ]);
