@@ -394,7 +394,16 @@ rabvApp.controller('rabvFastaAnalysisCtrl',
 		    	return majorCladeResult.closestTargetSequenceID;
 		    };
 
-			
+		    $scope.getFeatureCoverage = function(sequenceResult, featureName) {
+		    	var coveragePct = 0.0;
+		    	_.each(sequenceResult.featuresWithCoverage, function(fwc) {
+		    		if(fwc.name == featureName) {
+		    			coveragePct = fwc.coveragePct;
+		    		}
+		    	});
+		    	return coveragePct;
+		    }
+
 		}]);
 
 

@@ -98,10 +98,17 @@
 							<tr>
 								<th rowspan="2" style="width: 15%;">Sequence</th>
 								<th rowspan="2" style="width: 10%;">Identified as RABV?</th>
-								<th rowspan="2" style="width: 30%;">Major clade</th>
-								<th rowspan="2" style="width: 30%;">Minor clade</th>
-								<th rowspan="2" style="width: 15%;">Closest reference
-									sequence</th>
+								<th rowspan="2" style="width: 15%;">Major clade</th>
+								<th rowspan="2" style="width: 15%;">Minor clade</th>
+								<th rowspan="2" style="width: 15%;">Closest full genome reference sequence</th>
+								<th colspan="5" rowspan="1" style="width: 30%;">Coding region coverage</th>
+							</tr>
+							<tr>
+								<th rowspan="1" style="width: 6%;">N</th>
+								<th rowspan="1" style="width: 6%;">P</th>
+								<th rowspan="1" style="width: 6%;">M</th>
+								<th rowspan="1" style="width: 6%;">G</th>
+								<th rowspan="1" style="width: 6%;">L</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -113,6 +120,11 @@
 								<td>{{getMajorClade(rabvResult.rabvReport.sequenceResult)}}</td>
 								<td>{{getMinorClade(rabvResult.rabvReport.sequenceResult)}}</td>
 								<td>{{getClosestReferenceSequence(rabvResult.rabvReport.sequenceResult)}}</td>
+								<td>{{toFixed(getFeatureCoverage(rabvResult.rabvReport.sequenceResult, 'N'), 2)}}%</td>
+								<td>{{toFixed(getFeatureCoverage(rabvResult.rabvReport.sequenceResult, 'P'), 2)}}%</td>
+								<td>{{toFixed(getFeatureCoverage(rabvResult.rabvReport.sequenceResult, 'M'), 2)}}%</td>
+								<td>{{toFixed(getFeatureCoverage(rabvResult.rabvReport.sequenceResult, 'G'), 2)}}%</td>
+								<td>{{toFixed(getFeatureCoverage(rabvResult.rabvReport.sequenceResult, 'L'), 2)}}%</td>
 							</tr>
 						</tbody>
 					</table>
