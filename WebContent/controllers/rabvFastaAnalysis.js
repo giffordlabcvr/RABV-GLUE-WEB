@@ -356,7 +356,7 @@ rabvApp.controller('rabvFastaAnalysisCtrl',
 			
 			$scope.downloadExampleSequence = function() {
 				var url;
-				if(userAgent.os.family.indexOf("Windows") !== -1) {
+				if(userAgent.os.family.indexOf("Windows") == -1) {
 					url = "exampleSequences/fullGenome1.fasta";
 				} else {
 					url = "exampleSequencesMsWindows/fullGenome1.fasta";
