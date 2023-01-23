@@ -12,8 +12,8 @@ project.version = scmVersion.version
 remotes {
   rabvglue_cvr {
     host = 'rabv-glue.cvr.gla.ac.uk'
-    user = 'am589p'
-    identity = file('/Users/imacadmin/.ssh/rabv_glue_id_rsa')
+    user = 'ok16n'
+    identity = file('/Users/evdoxiataka/.ssh/rabv_glue_id_rsa')
   }
   
 }
@@ -141,7 +141,7 @@ task deployGluetoolsConfigRabvGlueCVR() {
   }
 }
 
-def scmCustomKey = '/Users/imacadmin/.ssh/github_id_rsa'
+def scmCustomKey = '/Users/evdoxiataka/.ssh/github_id_rsa'
 
 scmVersion {
 	hooks {
