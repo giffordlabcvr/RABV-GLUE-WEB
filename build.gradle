@@ -141,7 +141,7 @@ task deployGluetoolsConfigRabvGlueCVR() {
   }
 }
 
-def scmCustomKey = '/Users/evdoxiataka/.ssh/github_id_rsa'
+def scmCustomKey = '/Users/evdoxiataka/.ssh/github_id_rsa_old_format'
 
 scmVersion {
 	hooks {
